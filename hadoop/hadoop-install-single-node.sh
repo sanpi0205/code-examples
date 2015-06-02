@@ -6,6 +6,8 @@
 #  Created by zhangbo on 15/5/27.
 #
 
+# 参见来源： http://www.bogotobogo.com/Hadoop/BigData_hadoop_Install_on_ubuntu_single_node_cluster.php
+
 sudo apt-get update
 
 #install ssh
