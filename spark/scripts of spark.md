@@ -8,5 +8,8 @@ scripts of spark
 	tar -xvzf spark-1.3.1-bin-hadoop2.6.tgz
 	cd spark-1.3.1-bin-hadoop2.6.tgz
 	bin/pyspark  # bin/spark-shell打开Scala版本
+	# 可以使用IPython 或者 IPython Notebook
+	IPYTHON = 1 ./bin/pyspark
+	IPYTHON_OPTS = "notebook" ./bin/pyspark
 
-
+# 
