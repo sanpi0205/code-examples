@@ -8,6 +8,7 @@ from mysql.connector import errorcode
 
 DB_NAME = 'customes'
 
+
 # 判断数据库是否存在，不存在则建立数据库
 # source: http://dev.mysql.com/doc/connector-python/en/connector-python-example-ddl.html
 # source: http://www.cnblogs.com/zhangzhu/archive/2013/07/04/3172486.html
