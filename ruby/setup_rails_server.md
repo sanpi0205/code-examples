@@ -20,7 +20,8 @@ Linux修改RVM源
 
 
 ## 安装 RUby
-有了RVM后，安装Ruby将非常方便，RVM会自动安装Ruby依赖包，使用命令'rvm install 2.2.2' 即可从淘宝镜像网站安装最新Ruby版本。同时，查看当前安装版本可用命令 'rvm list'
+有了RVM后，安装Ruby将非常方便，RVM会自动安装Ruby依赖包，使用命令`rvm install 2.2.2`
+即可从淘宝镜像网站安装最新Ruby版本。同时，查看当前安装版本可用命令 `rvm list`
 
 安装好Ruby之后，建议修改gem源为Ruby淘宝，命令如下：
 
@@ -28,7 +29,7 @@ Linux修改RVM源
 	gem sources --remove https://rubygems.org/
 	gem sources -a https://ruby.taobao.org/
 	gem sources -l
-	
+
 
 ## 配置 gemset
 
