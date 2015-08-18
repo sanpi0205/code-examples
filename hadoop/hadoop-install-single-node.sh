@@ -71,6 +71,9 @@ export HADOOP_HDFS_HOME=$HADOOP_INSTALL
 export YARN_HOME=$HADOOP_INSTALL
 export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_INSTALL/lib/native
 export HADOOP_OPTS="-Djava.library.path=$HADOOP_INSTALL/lib"
+# WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... 
+# using builtin-java classes where applicable
+# 设定HADOOP_OPTS时，可以是export HADOOP_OPTS="-Djava.library.path=$HADOOP_INSTALL/lib/native"
 #HADOOP VARIABLES END
 
 #

@@ -1,7 +1,7 @@
-# ÔÚRÖĞ¾ö²ßÊ÷´úÂë
+# åœ¨Rä¸­å†³ç­–æ ‘ä»£ç 
 set.seed(1234)
 data(iris)
-# ÓĞ·Å»Ø³éÑù
+# æœ‰æ”¾å›æŠ½æ ·
 index = sample(1:2, nrow(iris), replace=T, prob=c(0.7,0.3))
 attach(iris)
 trainData = iris[index==1,]
@@ -9,24 +9,24 @@ testData = iris[index==2,]
 
 # Conditional Inference Trees
 library('party')
-# ¶¨ÒåÄ£ĞÍ
+# å®šä¹‰æ¨¡å‹
 myFormula = Species~ Sepal.Length + Sepal.Width + Petal.Length + Petal.Width
 iris_ctree = ctree(myFormula, data = trainData)
 table(trainData$Species, predict(iris_ctree))
-# ´íÎóÂÊ
+# é”™è¯¯ç‡
 preMatrix = table(trainData$Species, predict(iris_ctree))
 1 - sum(diag(preMatrix)) / sum(preMatrix)
 
 print(iris_ctree)
 plot(iris_ctree)
 
-# ¾ö²ßÊ÷(ÁíÒ»¸öR°ü)
+# å†³ç­–æ ‘(å¦ä¸€ä¸ªRåŒ…)
 library('rpart')
 iris_tree = rpart(myFormula, data = trainData)
 prediction = predict(iris_tree, newdata = trainData, type = 'class')
 table(trainData$Species, prediction)
 
-# ´íÎóÂÊ
+# é”™è¯¯ç‡
 preMatrix = table(trainData$Species, prediction)
 1 - sum(diag(preMatrix)) / sum(preMatrix)
 
