@@ -17,6 +17,8 @@ for element in arr:
 		arrFrequency[element] = 1
 	else:
 		arrFrequency[element] += 1
+	#或者使用dict的get方法，如果错误返回0
+	#arrFrequency[element] = arrFrequency.get(element, 0) + 1 
 print arrFrequency
 
 #方法二： count函数，返回tuple
@@ -35,10 +37,10 @@ arrFrequency = [(element, arr.count(element)) for element in uniqueValues]
 import operator
 
 #接着上文例子中的数据，按照降序排列
-sortedArray = sorted(arrFrequency.iteritems, key=operator.itemgetter(1), reverse=True)
+sortedArray = sorted(arrFrequency.iteritems(), key=operator.itemgetter(1), reverse=True)
 
 #按照升序排列
-sortedArray = sorted(arrFrequency.iteritems, key=operator.itemgetter(1))
+sortedArray = sorted(arrFrequency.iteritems(), key=operator.itemgetter(1))
 
 ```
 
