@@ -21,9 +21,25 @@ print arrFrequency
 
 #方法二： count函数，返回tuple
 uniqueValues = set(arr)
-arrFrequency = [(element, arr.count(element)) for element in uniqueValues ]
+arrFrequency = [(element, arr.count(element)) for element in uniqueValues]
 
 ```
 
 个人认为使用dict方法效率更高
+
+## dict排序
+
+对dict中数据按照某个迭代器排序
+
+```python
+import operator
+
+#接着上文例子中的数据，按照降序排列
+sortedArray = sorted(arrFrequency.iteritems, key=operator.itemgetter(1), reverse=True)
+
+#按照升序排列
+sortedArray = sorted(arrFrequency.iteritems, key=operator.itemgetter(1))
+
+```
+
 
