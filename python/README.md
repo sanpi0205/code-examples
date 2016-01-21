@@ -1,5 +1,7 @@
 # Python常用代码总结
 
+[toc]
+
 ## 频次统计
 
 统计list中每个元素出现的频次
@@ -22,4 +24,6 @@ uniqueValues = set(arr)
 arrFrequency = [(element, arr.count(element)) for element in uniqueValues ]
 
 ```
+
+个人认为使用dict方法效率更高
 
