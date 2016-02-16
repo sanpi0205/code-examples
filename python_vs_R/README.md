@@ -5,7 +5,7 @@ Python与R是统计学习中最常用两个模型工具，总体而言Python从�
 因而，也就很比较二者的优劣，只能说各有千秋，很多人也从多个角度和应用对二者进行深入的比较。本人出于兴趣，总结Python和R
 在统计模型中的代码。目前包括以下模型，以后会不断增加。
 
-* Linear Regression
+* (Linear Regression)[linear regression.md]
 * Logistic Regression
 * Decision Tree
 
