@@ -30,8 +30,10 @@ clf.score(X_test, y_test)
 train_score = np.array([])
 test_score = np.array([])
 
-penalty_factor = 10 ** np.arange(2, -2, -0.1)
+#penalty_factor = 10 ** np.arange(2, -2, -0.1)
+penalty_factor = np.logspace(2, -2, num=40, base=10)
 for i,C in enumerate(penalty_factor):
+    # 这里使用
     clf = LogisticRegression(penalty='l1', C=C, random_state=100)
     clf.fit(X_train, y_train)
     train_score = np.append(train_score, clf.score(X_train, y_train))
