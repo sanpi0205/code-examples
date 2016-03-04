@@ -28,7 +28,7 @@ coef = 3 * np.random.randn(n_features)
 inds = np.arange(n_features)
 np.random.shuffle(inds)
 
-coef[inds[10:]] = 0
+#coef[inds[3:]] = 0
 y = np.dot(X, coef)
 
 # 增加误差项
