@@ -26,6 +26,7 @@ def create_dababase(cursor):
 try:
 	print("创建数据库：{}".format(DB_NAME))
 	cnx.database = DB_NAME
+
 except mysql.connector.Error as err:
 	if err.errno == errorcode.ER_BAD_DB_ERROR:
 		create_dababase(cursor)
