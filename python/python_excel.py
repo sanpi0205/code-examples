@@ -3,7 +3,7 @@
 
 from __future__ import print_function
 import  xdrlib ,sys
-import import xlrd
+import xlrd
 
 # source: http://www.cnblogs.com/lhj588/archive/2012/01/06/2314181.html
 # source: https://github.com/python-excel/xlrd
