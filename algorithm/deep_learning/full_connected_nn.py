@@ -10,6 +10,12 @@ import logging
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
+
+''' the code is an example for 
+Deep neural network with fully connected and relu activation function
+'''
+
+
 #reference:
 #https://github.com/dmlc/mxnet-gtc-tutorial/blob/master/tutorial.ipynb
 
