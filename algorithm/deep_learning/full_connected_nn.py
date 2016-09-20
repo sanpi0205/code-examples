@@ -81,3 +81,7 @@ model.fit(X=train_iteration, eval_data=test_iteration,
 plt.imshow((test_X[0].reshape((28,28))*255).astype(np.uint8), cmap='Greys_r')
 plt.show()
 print 'Result:', model.predict(test_X[0:1])[0].argmax()
+
+#the overall error rate on test data set
+model.score(test_iteration)
+
