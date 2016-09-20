@@ -11,35 +11,42 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 ''' the code is an example for 
-Deep neural network with fully connected and relu activation function
+convolutional deep neural network
+the code is for 3d convolution and 3d pooling
+
 '''
 
 
 #reference:
-#https://github.com/dmlc/mxnet-gtc-tutorial/blob/master/tutorial.ipynb
+#https://github.com/dmlc/mxnet/blob/master/example/image-classification/train_mnist.py
 
 #define the model
 data = mx.symbol.Variable('data')
-#first full connected layer with the formula y = wx + b
-#where y stands for the first hiden layer units which is about 128 
-#and the raw input of image have 784 input variable or dimension
-fc1 = mx.symbol.FullyConnected(data=data, name='fc1', num_hidden=128)
 
-#first layer's activation function
-#here we use relu activation fuction which is y = max(X, 0)
-act1 = mx.symbol.Activation(data=fc1, name='relu1', act_type='relu')
+#the first layer of convolution with default stride=1
+conv1 = mx.symbol.Convolution(data=data, kernel=(5,5), num_filter=20)
+act1 = mx.symbol.Activation(data=conv1, act_type='relu')
+pool1 = mx.symbol.Pooling(data=act1, pool_type='max', kernel=(2,2), stride=(2,2))
 
-#second layer's defination
-fc2 = mx.symbol.FullyConnected(data=act1, name='fc2', num_hidden=64)
-act2 = mx.symbol.Activation(data=fc2, name='relu2', act_type='relu')
+#the second convolutional
+conv2 = mx.symbol.Convolution(data=pool1, kernel=(2,2), num_filter=50)
+act2 = mx.symbol.Activation(data=conv2, act_type='relu')
+pool2 = mx.symbol.Pooling(data=act2, pool_type='max', kernel=(2,2), stride=(2,2))
 
-#third layer
-fc3 = mx.symbol.FullyConnected(data=act2, name='fc3', num_hidden=10)
+#flatten the 3d pooling layer
+flatten = mx.symbol.Flatten(data=pool2)
+#first fully connected layer
+fc1 = mx.symbol.FullyConnected(data=flatten, num_hidden=500)
+act3 = mx.symbol.Activation(data=fc1, act_type='relu')
+
+#second fully connected layer
+fc2 = mx.symbol.FullyConnected(data=act3, num_hidden=10)
 
 #output layer
-mlp = mx.symbol.SoftmaxOutput(data=fc3, name='softmax')
+conv_nn = mx.symbol.SoftmaxOutput(data=fc2, name='softmax')
 
-mx.viz.plot_network(mlp)
+
+mx.viz.plot_network(conv_nn)
 
 
 #load the data
@@ -75,7 +82,7 @@ test_iteration = mx.io.NDArrayIter(test_X, test_Y, batch_size=batch_size)
 
 #training the model
 #train the feed forward neural network
-model = mx.model.FeedForward(symbol=mlp, ctx=mx.gpu(0), num_epoch=10,
+model = mx.model.FeedForward(symbol=conv_nn, ctx=mx.gpu(0), num_epoch=10,
                              learning_rate=0.1, momentum=0.9, wd=0.00001)
                              
 model.fit(X=train_iteration, eval_data=test_iteration,
