@@ -16,7 +16,6 @@ the code is for 3d convolution and 3d pooling
 
 '''
 
-
 #reference:
 #https://github.com/dmlc/mxnet/blob/master/example/image-classification/train_mnist.py
 
@@ -46,38 +45,20 @@ fc2 = mx.symbol.FullyConnected(data=act3, num_hidden=10)
 conv_nn = mx.symbol.SoftmaxOutput(data=fc2, name='softmax')
 
 
-mx.viz.plot_network(conv_nn)
+#mx.viz.plot_network(conv_nn)
 
 
 #load the data
-from sklearn.datasets import fetch_mldata
-mnist = fetch_mldata('MNIST original')
+train_set = mx.io.MNISTIter(image='../../data/mnist/train-images-idx3-ubyte',
+                            label='../../data/mnist/train-labels-idx1-ubyte',
+                            flat=False)
 
-#random permutation array
-np.random.seed(1234)
-p = np.random.permutation(mnist.data.shape[0])
-
-#new X and Y for the model
-X = mnist.data[p]
-Y = mnist.target[p]
-
-#change the type of the data
-#the default is int type, but in hte model training process
-#we need the float type
-
-#rescale the data into [0, 1]
-X = X.astype(np.float32) / 255
-
-train_X = X[:60000]
-train_Y = Y[:60000]
-
-test_X = X[60000:]
-test_Y = Y[60000:]
+test_set = mx.io.MNISTIter(image='../../data/mnist/t10k-images-idx3-ubyte',
+                           label='../../data/mnist/t10k-labels-idx1-ubyte',
+                           flat=False)
 
 #create a batch of data
 batch_size = 100
-train_iteration = mx.io.NDArrayIter(train_X, train_Y, batch_size=batch_size)
-test_iteration = mx.io.NDArrayIter(test_X, test_Y, batch_size=batch_size)
 
 
 #training the model
@@ -85,15 +66,5 @@ test_iteration = mx.io.NDArrayIter(test_X, test_Y, batch_size=batch_size)
 model = mx.model.FeedForward(symbol=conv_nn, ctx=mx.gpu(0), num_epoch=10,
                              learning_rate=0.1, momentum=0.9, wd=0.00001)
                              
-model.fit(X=train_iteration, eval_data=test_iteration,
+model.fit(X=train_set, eval_data=test_set,
           batch_end_callback=mx.callback.Speedometer(batch_size, 200))
-
-
-#test the 
-plt.imshow((test_X[0].reshape((28,28))*255).astype(np.uint8), cmap='Greys_r')
-plt.show()
-print 'Result:', model.predict(test_X[0:1])[0].argmax()
-
-#the overall error rate on test data set
-model.score(test_iteration)
-
