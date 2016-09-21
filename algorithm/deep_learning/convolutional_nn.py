@@ -68,3 +68,10 @@ model = mx.model.FeedForward(symbol=conv_nn, ctx=mx.gpu(0), num_epoch=10,
                              
 model.fit(X=train_set, eval_data=test_set,
           batch_end_callback=mx.callback.Speedometer(batch_size, 200))
+
+
+'''something need to do next
+1. load different type of input and transform it into the a suitable format 
+2. save a model that could by load into a classify enginy
+3. further more, build a web service for fun
+'''
